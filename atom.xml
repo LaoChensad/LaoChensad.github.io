@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-14T08:41:53.729Z</updated>
+  <updated>2018-12-14T13:09:28.613Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,22 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo部署后itpage自定义域名失效问题</title>
+    <link href="http://yoursite.com/2018/12/14/second/"/>
+    <id>http://yoursite.com/2018/12/14/second/</id>
+    <published>2018-12-14T13:11:53.000Z</published>
+    <updated>2018-12-14T13:09:28.613Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>使用hexo生成的第一篇文章</title>
