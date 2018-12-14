@@ -81,18 +81,22 @@
 
 
 
-<meta name="description" content="一个有时贫穷有时富有的人">
+<meta name="description" content="本文是我在部署hexo的实践过程中遇到的问题之一">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo部署后itpage自定义域名失效问题">
 <meta property="og:url" content="http://yoursite.com/2018/12/14/second/index.html">
 <meta property="og:site_name" content="YTCH的小世界">
-<meta property="og:description" content="一个有时贫穷有时富有的人">
+<meta property="og:description" content="本文是我在部署hexo的实践过程中遇到的问题之一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-14T13:09:28.613Z">
+<meta property="og:image" content="http://yoursite.com/2018/12/14/second/domain.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/14/second/cname.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/14/second/ytch.png">
+<meta property="og:updated_time" content="2018-12-14T14:53:56.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo部署后itpage自定义域名失效问题">
-<meta name="twitter:description" content="一个有时贫穷有时富有的人">
+<meta name="twitter:description" content="本文是我在部署hexo的实践过程中遇到的问题之一">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/14/second/domain.png">
 
 
 
@@ -348,7 +352,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  205
                 </span>
               
 
@@ -371,6 +375,10 @@
           
 
           
+              <div class="post-description">
+                  本文是我在部署hexo的实践过程中遇到的问题之一
+              </div>
+          
 
         </div>
       </header>
@@ -385,7 +393,8 @@
       
 
       
-        
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>根据网上的各种资料，我将我的阿里云域名解析好，又在github上的setting里修改custom domain，保存之后就能直接使用自己的域名访问博客了。<br><img src="domain.png" alt=""><br><strong>但是！</strong>我在多次重建部署站点以后发现，github上绑定的域名有时候会消失，还需要我手动再次保存，为了解决这个问题，我着手开始百度，终于发现了解决问题的关键。这个问题吧，解决起来挺简单的，只在在站点根目录下的source文件夹内创建一个名为CNAME的文本（不用包含后缀，我用sublime创建的），如图所示<br><img src="cname.png" alt=""><br>再在这个文本中输入自己的域名即可，如图。github仓库根目录也应该有这样一个文件。<br><img src="ytch.png" alt=""></p>
+
       
     </div>
     
@@ -475,8 +484,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -559,6 +577,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -594,7 +628,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">395</span>
+    <span title="Site words total count">600</span>
   
 </div>
 

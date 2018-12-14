@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-14T13:09:28.613Z</updated>
+  <updated>2018-12-14T14:53:56.700Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,11 @@
     <link href="http://yoursite.com/2018/12/14/second/"/>
     <id>http://yoursite.com/2018/12/14/second/</id>
     <published>2018-12-14T13:11:53.000Z</published>
-    <updated>2018-12-14T13:09:28.613Z</updated>
+    <updated>2018-12-14T14:53:56.700Z</updated>
     
     <summary type="html">
+    
+      本文是我在部署hexo的实践过程中遇到的问题之一
     
     </summary>
     
