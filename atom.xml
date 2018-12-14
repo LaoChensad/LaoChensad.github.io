@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-14T01:33:03.002Z</updated>
+  <updated>2018-12-14T01:37:56.424Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2018/12/12/my-first-article/"/>
     <id>http://yoursite.com/2018/12/12/my-first-article/</id>
     <published>2018-12-12T08:11:53.000Z</published>
-    <updated>2018-12-14T01:33:03.002Z</updated>
+    <updated>2018-12-14T01:37:56.424Z</updated>
     
     <summary type="html">
     
@@ -29,8 +29,8 @@
     
     </summary>
     
-      <category term="Blog" scheme="http://yoursite.com/categories/Blog/"/>
     
+      <category term="hexo, test" scheme="http://yoursite.com/tags/hexo-test/"/>
     
   </entry>
   
@@ -38,18 +38,17 @@
     <title>Hello World</title>
     <link href="http://yoursite.com/2018/12/12/hello-world/"/>
     <id>http://yoursite.com/2018/12/12/hello-world/</id>
-    <published>2018-12-12T06:06:55.126Z</published>
-    <updated>2018-12-12T06:06:55.126Z</updated>
+    <published>2018-12-11T16:00:00.000Z</published>
+    <updated>2018-12-14T01:37:53.128Z</updated>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
+      hexo生成的官方文档
     
     </summary>
     
+    
+      <category term="Hello World" scheme="http://yoursite.com/tags/Hello-World/"/>
     
   </entry>
   
