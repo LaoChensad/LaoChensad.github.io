@@ -1,0 +1,1 @@
+clickToFront = 600; TagCanvas.Start（ 'resCanvas'）; TagCanvas.tc ['resCanvas']。Wheel（false）} catch（e）{console.log（e）; document.getElementById（'myCanvasContainer'）。style.display ='none'; }};

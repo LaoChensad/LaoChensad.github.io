@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-21T01:24:46.176Z</updated>
+  <updated>2018-12-24T06:51:06.990Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>这博客挺好的不是吗</title>
+    <link href="http://yoursite.com/2018/12/24/%E8%80%81%E5%B8%88%E8%AF%B4%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E8%AE%BE%E8%AE%A1%E4%B8%8D%E5%A4%9F%E7%AC%A6%E5%90%88%E8%AF%BE%E7%A8%8B%E8%A6%81%E6%B1%82/"/>
+    <id>http://yoursite.com/2018/12/24/老师说我的博客设计不够符合课程要求/</id>
+    <published>2018-12-24T06:43:56.000Z</published>
+    <updated>2018-12-24T06:51:06.990Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天上荆丽倩老师的课，我直接给我的博客（就是你现在正在访问的这个）截了个图就上交了= =，老师说这个不太好，不能体现我上课的收获。我觉得还好吧，其实我自己私下做的设计，和这个博客的样子是一毛一样的（有些东西位置不太一样）。只是配色偏蓝色调，总体布局和这个差不多。</p><p>个人博客唉，程序员的个人博客唉，想怎么丰富呀？肯定是像代码一样简单纯粹一目了然是最好的了。如果太花里胡哨，不能让人立刻知道我想说的话，那这个博客作为程序员的博客就有那么一点点不合格了。</p><p>这个款式在github上最受欢迎是有原因的，我们大家都喜欢这样的极简的款式。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天上荆丽倩老师的课，我直接给我的博客（就是你现在正在访问的这个）截了个图就上交了= =，老师说这个不太好，不能体现我上课的收获。我觉得还好吧，其实我自己私下做的设计，和这个博客的样子是一毛一样的（有些东西位置不太一样）。只是配色偏蓝色调，总体布局和这个差不多。&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="散文" scheme="http://yoursite.com/tags/%E6%95%A3%E6%96%87/"/>
+    
+  </entry>
   
   <entry>
     <title>同学的爷爷</title>
