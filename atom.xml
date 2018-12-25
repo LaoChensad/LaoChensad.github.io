@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-25T01:02:42.387Z</updated>
+  <updated>2018-12-25T01:04:37.537Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2018/12/25/%E5%85%B3%E4%BA%8Etags%E6%A0%87%E7%AD%BE%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E8%B0%83%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>http://yoursite.com/2018/12/25/关于tags标签无法正常调用的问题/</id>
     <published>2018-12-25T00:48:20.000Z</published>
-    <updated>2018-12-25T01:02:42.387Z</updated>
+    <updated>2018-12-25T01:04:37.537Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>在hexo配置文件中打开tags标签，又在终端生成了tags页面，文章中也使用了tags，但是配置后单击tags，不能查看到自己已经添加的tags，在网上查了多种方法均和我的操作一样。最后发现问题所在。</p><p>建立在看这篇博客的同学已经生成tags页面并且启用的基础上，具体解决步骤如下：</p><h2 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h2><p>编辑文件夹tags子目录的index文件，<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">"tags"</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">"tag"</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></p><p><strong>其中的要点在于！<br>layout参数名称应该使用你的主题文件夹下layout目录中的第一级的布局文件，比如我的名叫tag.swig，那我这里就用的”tag”，如果你的叫tags，那你就应该用tags（也许你的叫a）</strong></p><h2 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h2><p>检查hexo站点配置文件的Directory选项<br>看看名称是否匹配<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Directory</span></span><br><span class="line"><span class="symbol">tag_dir:</span> tags</span><br></pre></td></tr></table></figure></p><p>这样应该解决了</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>在hexo配置文件中打开tags标签，又在终端生成了tags页面，文章中也使用了tags，但是配置后单击tags，不能查看到自己已经添加的tags，在网上查了多种方法均和我的操作一样。最后发现问题所在。</p><p>建立在看这篇博客的同学已经生成tags页面并且启用的基础上，具体解决步骤如下：</p><h2 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h2><p>编辑文件夹tags子目录的index文件，<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">"tags"</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">"tag"</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></p><p><strong>其中的要点在于！<br>layout参数名称应该使用你的主题文件夹下layout目录中的第一级的布局文件，比如我的名叫tag.swig，那我这里就用的”tag”，如果你的叫tags，那你就应该用tags（也许你的叫a）</strong></p><h2 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h2><p>检查hexo站点配置文件的Directory选项<br>看看名称是否匹配<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Directory</span></span><br><span class="line"><span class="symbol">tag_dir:</span> tags</span><br></pre></td></tr></table></figure></p><p>这样应该解决了</p>]]></content>
     
     <summary type="html">
     
