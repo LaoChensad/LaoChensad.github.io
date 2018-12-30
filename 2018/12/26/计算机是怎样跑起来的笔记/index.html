@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="YTCH的小世界">
 <meta property="og:description" content="关于这本书的一些笔记= =其实就是我根据个人理解的改编浓缩，我想这样做有助于我记忆书本内容（本文根据我的纸质笔记进一步改编）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-26T14:22:20.136Z">
+<meta property="og:updated_time" content="2018-12-29T01:46:13.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《计算机是怎样跑起来的》笔记">
 <meta name="twitter:description" content="关于这本书的一些笔记= =其实就是我根据个人理解的改编浓缩，我想这样做有助于我记忆书本内容（本文根据我的纸质笔记进一步改编）">
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.5k
+                  3.6k
                 </span>
               
 
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  12
                 </span>
               
             </div>
@@ -477,6 +477,26 @@
 <h2 id="3-2-机器语言和汇编语言"><a href="#3-2-机器语言和汇编语言" class="headerlink" title="3.2 机器语言和汇编语言"></a>3.2 机器语言和汇编语言</h2><p>在机器语言程序中，到处都是有特定含义的指令或数据的0和1的组合。可是对人来说，如果只看0和1的话，恐怕很难判断各个组合都代表什么。</p>
 <p>于是有人发明了一种编程方法，根据表示指令功能的英语单词起一个相似的昵称，并将这个昵称赋给0和1的组合。这种类似英语单词的昵称就叫做“助记符”，使用助记符的编程语言就叫做“汇编语言”。</p>
 <p>汇编语言的语法非常简单，以至于语法只有一个，即把“标签”“操作码（指令）”和“操作数（指令的对象）”并排写在一行上，仅此而已。</p>
+<p>【这里要有表格】</p>
+<p>标签的作用是为该行为代码对应的内存地址起一个名字。用汇编语言编程时可以在任何需要的地方“贴上”名称任意的标签。</p>
+<p>操作码就是表示“做什么”的指令。因为用助记符表示的指令是英语单词的缩写，比如LD是Load（加载）的缩写，所以多多少少能猜出其中的含义。汇编语言中提出来多少种助记符，CPU就有多少种功能。</p>
+<p>操作数表示的是指令执行的对象。CPU的寄存器，内存地址，I/O地址或者直接给出的数字都可以作为操作数。如果是某条指令需要多个操作数，那么它们之间就要用逗号分割。操作数的个数取决于指令的种类。也有不需要操作数的指令，比如用于停止CPU运转的HALF指令。</p>
+<p>汇编语言的语法和英语祈使句的语法很像。</p>
+<p>构成机器语言的是二进制数，而在汇编语言中，则使用十进制数和十六进制数纪录数据。</p>
+<p>【此处有表格】</p>
+<h2 id="3-3-Z80-CPU的寄存器结构"><a href="#3-3-Z80-CPU的寄存器结构" class="headerlink" title="3.3 Z80 CPU的寄存器结构"></a>3.3 Z80 CPU的寄存器结构</h2><p><em>复习<br>计算机的硬件有三个基本要素，CPU、内存和I/O。CPU负责解释、执行程序，从内存或I/O输入数据，在内部进行运算，再把运算结果输出到内存中或I/O。内存中存放着程序，程序是指令和数据的集合。I/O中临时存放着用于与周边设备进行输入输出的数据。</em></p>
+<p><strong>CPU的寄存器</strong><br>CPU中用来存储数据的地方，同时具备对数据进行运算的能力。</p>
+<p>CPU带有什么样的寄存器取决于CPU的种类。Z80 CPU所带有的寄存器如图所示：<br>【此处有表格】</p>
+<p>寄存器的用途取决于它的类型。有的指令只能将特定的寄存器指定为操作数。</p>
+<blockquote>
+<p>A寄存器也叫作“累加器”，是运算的核心。<br>F寄存器又称“标志寄存器”，用于存储运算结果的状态。<br>PC寄存器又称“程序指针”，存储着指向CPU接下来要执行的指令的地址。PC寄存器的值会随着滴答滴答的时钟信号自动更新，可以说程序就是依靠不断变化的PC寄存器的值运行起来的。<br>SP寄存器也叫作“栈顶置针”，用于在内存中创建出一块成为“栈”的临时数据存储区域。</p>
+</blockquote>
+<h2 id="3-4-追踪程序的运行过程"><a href="#3-4-追踪程序的运行过程" class="headerlink" title="3.4 追踪程序的运行过程"></a>3.4 追踪程序的运行过程</h2><p>用汇编语言编写的程序是不能直接运行的，必须先转换成机器语言，机器语言是唯一一种CPU能直接理解的编程语言。</p>
+<p>1条汇编语言的指令所对应的机器语言由多个字节构成。而且，同样是汇编语言中的一条指令，有的指令对应着一个字节的机器语言，有的指令则对应着多个字节的机器语言。转换而成的机器语言有多少个字节取决于汇编语言的指令的种类以及操作数的个数。</p>
+<h2 id="3-5-尝试手工汇编"><a href="#3-5-尝试手工汇编" class="headerlink" title="3.5 尝试手工汇编"></a>3.5 尝试手工汇编</h2><p>在CPU的资料中，明确写有所有可以使用的助记符，以及助记符转换成机器语言后的数值。只要查看这些资料就可以把用汇编语言编写的程序手工转换成机器语言的程序，这样的工作成为“手工汇编”。进行手工汇编时，要一行一行地把用汇编语言编写的程序转换成机器语言。</p>
+<p>【此处表格】</p>
+<p>第一行的“LD A，207”匹配“LD A，num”这个模式。然后将十进制数的207转换成8比特的二进制数，用这个二进制数替换num，之后，得到00111110 11001111。</p>
+<p>第2条指令“OUT（2），A”匹配“OUT（num），A”这个模式，所以可以先转换成“11010011 num”，然后把num的部分替换成00000010，即用8比特的二进制数表示的十进制数2，最终就得到了机器语言“11010011 00000010”。</p>
 
       
     </div>
@@ -508,6 +528,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/27/今天开始阅读hexo的代码/" rel="prev" title="hexo代码阅读分析">
+                <i class="fa fa-chevron-left"></i> hexo代码阅读分析
+              </a>
             
           </div>
 
@@ -596,7 +620,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -609,7 +633,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -677,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第1章-计算机的三大原则"><span class="nav-text">第1章 计算机的三大原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#章前小问"><span class="nav-text">章前小问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-计算机的三大根本性基础"><span class="nav-text">1.1 计算机的三大根本性基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-输入、运算、输出是硬件的基础"><span class="nav-text">1.2 输入、运算、输出是硬件的基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-软件是指令和数据的集合"><span class="nav-text">1.3 软件是指令和数据的集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件"><span class="nav-text">软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-对计算机来说什么都是数字"><span class="nav-text">1.4 对计算机来说什么都是数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对。"><span class="nav-text">1.5 只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-为了贴近人类，计算机在不断地进化"><span class="nav-text">1.6 为了贴近人类，计算机在不断地进化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第2章"><span class="nav-text">第2章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方法的进化"><span class="nav-text">编程方法的进化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第3章-体验一次手工汇编"><span class="nav-text">第3章 体验一次手工汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#小问"><span class="nav-text">小问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-从程序员的角度看硬件"><span class="nav-text">3.1 从程序员的角度看硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-机器语言和汇编语言"><span class="nav-text">3.2 机器语言和汇编语言</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第1章-计算机的三大原则"><span class="nav-text">第1章 计算机的三大原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#章前小问"><span class="nav-text">章前小问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-计算机的三大根本性基础"><span class="nav-text">1.1 计算机的三大根本性基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-输入、运算、输出是硬件的基础"><span class="nav-text">1.2 输入、运算、输出是硬件的基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-软件是指令和数据的集合"><span class="nav-text">1.3 软件是指令和数据的集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件"><span class="nav-text">软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-对计算机来说什么都是数字"><span class="nav-text">1.4 对计算机来说什么都是数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对。"><span class="nav-text">1.5 只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-为了贴近人类，计算机在不断地进化"><span class="nav-text">1.6 为了贴近人类，计算机在不断地进化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第2章"><span class="nav-text">第2章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方法的进化"><span class="nav-text">编程方法的进化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第3章-体验一次手工汇编"><span class="nav-text">第3章 体验一次手工汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#小问"><span class="nav-text">小问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-从程序员的角度看硬件"><span class="nav-text">3.1 从程序员的角度看硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-机器语言和汇编语言"><span class="nav-text">3.2 机器语言和汇编语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Z80-CPU的寄存器结构"><span class="nav-text">3.3 Z80 CPU的寄存器结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-追踪程序的运行过程"><span class="nav-text">3.4 追踪程序的运行过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-尝试手工汇编"><span class="nav-text">3.5 尝试手工汇编</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -719,7 +743,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4.2k</span>
+    <span title="Site words total count">6.3k</span>
   
 </div>
 

@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hexo,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="YTCH的小世界" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="看了网上很多的hexo的代码优化，但是感觉有的好有的不好，我觉得我有必要自己阅读代码= =（原来太懒了），这篇文章长期更新">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo代码阅读分析">
+<meta property="og:url" content="http://yoursite.com/2018/12/27/今天开始阅读hexo的代码/index.html">
+<meta property="og:site_name" content="YTCH的小世界">
+<meta property="og:description" content="看了网上很多的hexo的代码优化，但是感觉有的好有的不好，我觉得我有必要自己阅读代码= =（原来太懒了），这篇文章长期更新">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-27T16:54:54.903Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo代码阅读分析">
+<meta name="twitter:description" content="看了网上很多的hexo的代码优化，但是感觉有的好有的不好，我觉得我有必要自己阅读代码= =（原来太懒了），这篇文章长期更新">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/27/今天开始阅读hexo的代码/">
+
+
+
+
+
+  <title>hexo代码阅读分析 | YTCH的小世界</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YTCH的小世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/27/今天开始阅读hexo的代码/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YTCH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YTCH的小世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hexo代码阅读分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T01:20:18+08:00">
+                2018-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/27/今天开始阅读hexo的代码/" class="leancloud_visitors" data-flag-title="hexo代码阅读分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  329
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  看了网上很多的hexo的代码优化，但是感觉有的好有的不好，我觉得我有必要自己阅读代码= =（原来太懒了），这篇文章长期更新
+              </div>
+          
+
+          
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第一章-config-yml"><a href="#第一章-config-yml" class="headerlink" title="第一章 _config.yml"></a>第一章 _config.yml</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>_config.yml是hexo的站点配置文件</p>
+<h2 id="1-1-Site"><a href="#1-1-Site" class="headerlink" title="1.1 Site"></a>1.1 Site</h2><h2 id="1-2-URL"><a href="#1-2-URL" class="headerlink" title="1.2 URL"></a>1.2 URL</h2><h2 id="1-3-Directory"><a href="#1-3-Directory" class="headerlink" title="1.3 Directory"></a>1.3 Directory</h2><h2 id="1-4-Writing"><a href="#1-4-Writing" class="headerlink" title="1.4 Writing"></a>1.4 Writing</h2><h2 id="1-5-index-generator"><a href="#1-5-index-generator" class="headerlink" title="1.5 index_generator"></a>1.5 index_generator</h2><h2 id="1-6-Category-amp-Tag"><a href="#1-6-Category-amp-Tag" class="headerlink" title="1.6 Category &amp; Tag"></a>1.6 Category &amp; Tag</h2><h2 id="1-7-Date-Time-format"><a href="#1-7-Date-Time-format" class="headerlink" title="1.7 Date / Time format"></a>1.7 Date / Time format</h2><h2 id="1-8-Pagination"><a href="#1-8-Pagination" class="headerlink" title="1.8 Pagination"></a>1.8 Pagination</h2><h2 id="1-9-Extensions"><a href="#1-9-Extensions" class="headerlink" title="1.9 Extensions"></a>1.9 Extensions</h2><h2 id="1-10-feed"><a href="#1-10-feed" class="headerlink" title="1.10 feed"></a>1.10 feed</h2><h2 id="1-11-search"><a href="#1-11-search" class="headerlink" title="1.11 search"></a>1.11 search</h2><h2 id="1-12-Deployment"><a href="#1-12-Deployment" class="headerlink" title="1.12 Deployment"></a>1.12 Deployment</h2><h2 id="1-13-githubEmojis"><a href="#1-13-githubEmojis" class="headerlink" title="1.13 githubEmojis"></a>1.13 githubEmojis</h2><h2 id="1-14-live2d"><a href="#1-14-live2d" class="headerlink" title="1.14 live2d"></a>1.14 live2d</h2><h1 id="第二章-db-json"><a href="#第二章-db-json" class="headerlink" title="第二章 db.json"></a>第二章 db.json</h1><h1 id="第三章-debug-json"><a href="#第三章-debug-json" class="headerlink" title="第三章 debug.json"></a>第三章 debug.json</h1><h1 id="第四章-live2d-models"><a href="#第四章-live2d-models" class="headerlink" title="第四章 live2d_models"></a>第四章 live2d_models</h1><h2 id="4-1-live2d-widget-model-koharu"><a href="#4-1-live2d-widget-model-koharu" class="headerlink" title="4.1 live2d-widget-model-koharu"></a>4.1 live2d-widget-model-koharu</h2><h3 id="4-1-1-assets"><a href="#4-1-1-assets" class="headerlink" title="4.1.1 assets"></a>4.1.1 assets</h3><ol>
+<li>koharu.model.json</li>
+<li>koharu.physics.json</li>
+<li>moc<br>(1) koharu.2048<br>texture_00.png<br>(2) koharu.moc</li>
+<li>mtn<br>01.mtn<br>02.mtn<br>03.mtn<br>04.mtn<br>05.mtn<br>06.mtn<br>07.mtn<br>08.mtn<br>09.mtn<br>idle.mtn</li>
+</ol>
+<h3 id="4-1-2-package-lock-json"><a href="#4-1-2-package-lock-json" class="headerlink" title="4.1.2 package-lock.json"></a>4.1.2 package-lock.json</h3><h3 id="4-1-3-package-json"><a href="#4-1-3-package-json" class="headerlink" title="4.1.3 package.json"></a>4.1.3 package.json</h3><h1 id="第五章-node-modules"><a href="#第五章-node-modules" class="headerlink" title="第五章 node_modules"></a>第五章 node_modules</h1><h2 id="5-1-a-sync-waterfall"><a href="#5-1-a-sync-waterfall" class="headerlink" title="5.1 a-sync-waterfall"></a>5.1 a-sync-waterfall</h2><h2 id="5-2-abbrev"><a href="#5-2-abbrev" class="headerlink" title="5.2 abbrev"></a>5.2 abbrev</h2><h2 id="5-3-accepts"><a href="#5-3-accepts" class="headerlink" title="5.3 accepts"></a>5.3 accepts</h2><h2 id="5-4-align-text"><a href="#5-4-align-text" class="headerlink" title="5.4 align-text"></a>5.4 align-text</h2><h2 id="5-5-amdefine"><a href="#5-5-amdefine" class="headerlink" title="5.5 amdefine"></a>5.5 amdefine</h2><h2 id="5-6-ansi-regex"><a href="#5-6-ansi-regex" class="headerlink" title="5.6 ansi-regex"></a>5.6 ansi-regex</h2><h2 id="5-7-ansi-styles"><a href="#5-7-ansi-styles" class="headerlink" title="5.7 ansi-styles"></a>5.7 ansi-styles</h2><h2 id="5-8-anymatch"><a href="#5-8-anymatch" class="headerlink" title="5.8 anymatch"></a>5.8 anymatch</h2><h2 id="5-9-archy"><a href="#5-9-archy" class="headerlink" title="5.9 archy"></a>5.9 archy</h2><h2 id="5-10-argparse"><a href="#5-10-argparse" class="headerlink" title="5.10 argparse"></a>5.10 argparse</h2><h2 id="5-11-arr-diff"><a href="#5-11-arr-diff" class="headerlink" title="5.11 arr-diff"></a>5.11 arr-diff</h2><h2 id="5-12-arr-flatten"><a href="#5-12-arr-flatten" class="headerlink" title="5.12 arr-flatten"></a>5.12 arr-flatten</h2><h2 id="5-13-arr-union"><a href="#5-13-arr-union" class="headerlink" title="5.13 arr-union"></a>5.13 arr-union</h2><h2 id="5-14-array-unique"><a href="#5-14-array-unique" class="headerlink" title="5.14 array-unique"></a>5.14 array-unique</h2><h2 id="5-15-asap"><a href="#5-15-asap" class="headerlink" title="5.15 asap"></a>5.15 asap</h2><h2 id="5-15-assign-symbols"><a href="#5-15-assign-symbols" class="headerlink" title="5.15 assign-symbols"></a>5.15 assign-symbols</h2><h2 id="5-16-async"><a href="#5-16-async" class="headerlink" title="5.16 async"></a>5.16 async</h2><h2 id="5-17-async-each"><a href="#5-17-async-each" class="headerlink" title="5.17 async-each"></a>5.17 async-each</h2><h2 id="5-18-atob"><a href="#5-18-atob" class="headerlink" title="5.18 atob"></a>5.18 atob</h2><h2 id="5-19-babel-code-frame"><a href="#5-19-babel-code-frame" class="headerlink" title="5.19 babel-code-frame"></a>5.19 babel-code-frame</h2><h2 id="5-20-babel-eslint"><a href="#5-20-babel-eslint" class="headerlink" title="5.20 babel-eslint"></a>5.20 babel-eslint</h2><h2 id="5-21-babel-messages"><a href="#5-21-babel-messages" class="headerlink" title="5.21 babel-messages"></a>5.21 babel-messages</h2><h2 id="5-22-babel-runtime"><a href="#5-22-babel-runtime" class="headerlink" title="5.22 babel-runtime"></a>5.22 babel-runtime</h2><h2 id="5-23-babel-traverse"><a href="#5-23-babel-traverse" class="headerlink" title="5.23 babel-traverse"></a>5.23 babel-traverse</h2><h2 id="5-24-babel-types"><a href="#5-24-babel-types" class="headerlink" title="5.24 babel-types"></a>5.24 babel-types</h2><h2 id="5-25-babylon"><a href="#5-25-babylon" class="headerlink" title="5.25 babylon"></a>5.25 babylon</h2><h2 id="5-26-balances-match"><a href="#5-26-balances-match" class="headerlink" title="5.26 balances-match"></a>5.26 balances-match</h2><h2 id="5-27-base"><a href="#5-27-base" class="headerlink" title="5.27 base"></a>5.27 base</h2><h2 id="5-28-basic-auth"><a href="#5-28-basic-auth" class="headerlink" title="5.28 basic-auth"></a>5.28 basic-auth</h2><h2 id="binary-extensions"><a href="#binary-extensions" class="headerlink" title="binary-extensions"></a>binary-extensions</h2><h2 id="bluebird"><a href="#bluebird" class="headerlink" title="bluebird"></a>bluebird</h2><h2 id="boolbase"><a href="#boolbase" class="headerlink" title="boolbase"></a>boolbase</h2><h2 id="brace-expansion"><a href="#brace-expansion" class="headerlink" title="brace-expansion"></a>brace-expansion</h2><h2 id="braces"><a href="#braces" class="headerlink" title="braces"></a>braces</h2><h2 id="browser-fingerprint"><a href="#browser-fingerprint" class="headerlink" title="browser-fingerprint"></a>browser-fingerprint</h2><h2 id="bytes"><a href="#bytes" class="headerlink" title="bytes"></a>bytes</h2><h2 id="cache-base"><a href="#cache-base" class="headerlink" title="cache-base"></a>cache-base</h2><h2 id="camel-case"><a href="#camel-case" class="headerlink" title="camel-case"></a>camel-case</h2><h2 id="camelcase"><a href="#camelcase" class="headerlink" title="camelcase"></a>camelcase</h2><h2 id="center-align"><a href="#center-align" class="headerlink" title="center-align"></a>center-align</h2><h2 id="chalk"><a href="#chalk" class="headerlink" title="chalk"></a>chalk</h2><h2 id="cheerio"><a href="#cheerio" class="headerlink" title="cheerio"></a>cheerio</h2><h2 id="chokidar"><a href="#chokidar" class="headerlink" title="chokidar"></a>chokidar</h2><h2 id="class-utils"><a href="#class-utils" class="headerlink" title="class-utils"></a>class-utils</h2><h2 id="cliui"><a href="#cliui" class="headerlink" title="cliui"></a>cliui</h2><h2 id="code-point-at"><a href="#code-point-at" class="headerlink" title="code-point-at"></a>code-point-at</h2><h2 id="collection-visit"><a href="#collection-visit" class="headerlink" title="collection-visit"></a>collection-visit</h2><h2 id="color-convert"><a href="#color-convert" class="headerlink" title="color-convert"></a>color-convert</h2><h2 id="color-name"><a href="#color-name" class="headerlink" title="color-name"></a>color-name</h2><h2 id="colors"><a href="#colors" class="headerlink" title="colors"></a>colors</h2><h2 id="command-exists"><a href="#command-exists" class="headerlink" title="command-exists"></a>command-exists</h2><h2 id="conponent-emitter"><a href="#conponent-emitter" class="headerlink" title="conponent-emitter"></a>conponent-emitter</h2><h2 id="compression"><a href="#compression" class="headerlink" title="compression"></a>compression</h2><h2 id="concat-map"><a href="#concat-map" class="headerlink" title="concat-map"></a>concat-map</h2><h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><h2 id="copy-descriptor"><a href="#copy-descriptor" class="headerlink" title="copy-descriptor"></a>copy-descriptor</h2><h2 id="core-js"><a href="#core-js" class="headerlink" title="core-js"></a>core-js</h2><h2 id="cross-spawn"><a href="#cross-spawn" class="headerlink" title="cross-spawn"></a>cross-spawn</h2><h2 id="css-parse"><a href="#css-parse" class="headerlink" title="css-parse"></a>css-parse</h2><h2 id="css-select"><a href="#css-select" class="headerlink" title="css-select"></a>css-select</h2><h2 id="css-what"><a href="#css-what" class="headerlink" title="css-what"></a>css-what</h2><h2 id="cuid"><a href="#cuid" class="headerlink" title="cuid"></a>cuid</h2><h2 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h2><h2 id="decamelize"><a href="#decamelize" class="headerlink" title="decamelize"></a>decamelize</h2><h2 id="decode-uri-component"><a href="#decode-uri-component" class="headerlink" title="decode-uri-component"></a>decode-uri-component</h2><h2 id="define-property"><a href="#define-property" class="headerlink" title="define-property"></a>define-property</h2><h2 id="depd"><a href="#depd" class="headerlink" title="depd"></a>depd</h2><h2 id="destroy"><a href="#destroy" class="headerlink" title="destroy"></a>destroy</h2><h2 id="dom-serializer"><a href="#dom-serializer" class="headerlink" title="dom-serializer"></a>dom-serializer</h2><h2 id="domelementtype"><a href="#domelementtype" class="headerlink" title="domelementtype"></a>domelementtype</h2><h2 id="domhandler"><a href="#domhandler" class="headerlink" title="domhandler"></a>domhandler</h2><h2 id="domutils"><a href="#domutils" class="headerlink" title="domutils"></a>domutils</h2><h2 id="ee-first"><a href="#ee-first" class="headerlink" title="ee-first"></a>ee-first</h2><h2 id="ejs"><a href="#ejs" class="headerlink" title="ejs"></a>ejs</h2><h2 id="encodeurl"><a href="#encodeurl" class="headerlink" title="encodeurl"></a>encodeurl</h2><h2 id="entities"><a href="#entities" class="headerlink" title="entities"></a>entities</h2><h2 id="escape-html"><a href="#escape-html" class="headerlink" title="escape-html"></a>escape-html</h2><h2 id="escape-string-regexp"><a href="#escape-string-regexp" class="headerlink" title="escape-string-regexp"></a>escape-string-regexp</h2><h2 id="esprima"><a href="#esprima" class="headerlink" title="esprima"></a>esprima</h2><h2 id="esutils"><a href="#esutils" class="headerlink" title="esutils"></a>esutils</h2><h2 id="etag"><a href="#etag" class="headerlink" title="etag"></a>etag</h2><h2 id="expand"><a href="#expand" class="headerlink" title="expand-"></a>expand-</h2><h1 id="第六章-package-lock-json"><a href="#第六章-package-lock-json" class="headerlink" title="第六章 package-lock.json"></a>第六章 package-lock.json</h1><h1 id="第七章-package-json"><a href="#第七章-package-json" class="headerlink" title="第七章 package.json"></a>第七章 package.json</h1><h1 id="第八章-public"><a href="#第八章-public" class="headerlink" title="第八章 public"></a>第八章 public</h1><h2 id="8-1-2018"><a href="#8-1-2018" class="headerlink" title="8.1 2018"></a>8.1 2018</h2><h2 id="8-2-about"><a href="#8-2-about" class="headerlink" title="8.2 about"></a>8.2 about</h2><h2 id="8-3-archives"><a href="#8-3-archives" class="headerlink" title="8.3 archives"></a>8.3 archives</h2><h2 id="8-4-atom-xml"><a href="#8-4-atom-xml" class="headerlink" title="8.4 atom.xml"></a>8.4 atom.xml</h2><h2 id="8-5-CNAME"><a href="#8-5-CNAME" class="headerlink" title="8.5 CNAME"></a>8.5 CNAME</h2><h2 id="8-6-css"><a href="#8-6-css" class="headerlink" title="8.6 css"></a>8.6 css</h2><h2 id="8-7-images"><a href="#8-7-images" class="headerlink" title="8.7 images"></a>8.7 images</h2><h2 id="8-8-index-html"><a href="#8-8-index-html" class="headerlink" title="8.8 index.html"></a>8.8 index.html</h2><h2 id="8-9-js"><a href="#8-9-js" class="headerlink" title="8.9 js"></a>8.9 js</h2><h2 id="8-10-lib"><a href="#8-10-lib" class="headerlink" title="8.10 lib"></a>8.10 lib</h2><h2 id="8-11-live2dw"><a href="#8-11-live2dw" class="headerlink" title="8.11 live2dw"></a>8.11 live2dw</h2><h2 id="8-12-tags"><a href="#8-12-tags" class="headerlink" title="8.12 tags"></a>8.12 tags</h2><h2 id="8-13-uploads"><a href="#8-13-uploads" class="headerlink" title="8.13 uploads"></a>8.13 uploads</h2><h1 id="第九章-scaffolds"><a href="#第九章-scaffolds" class="headerlink" title="第九章 scaffolds"></a>第九章 scaffolds</h1><h2 id="9-1-draft-md"><a href="#9-1-draft-md" class="headerlink" title="9.1 draft,md"></a>9.1 draft,md</h2><h2 id="9-2-page-md"><a href="#9-2-page-md" class="headerlink" title="9.2 page.md"></a>9.2 page.md</h2><h2 id="9-3-post-md"><a href="#9-3-post-md" class="headerlink" title="9.3 post.md"></a>9.3 post.md</h2><h1 id="第十章-source"><a href="#第十章-source" class="headerlink" title="第十章 source"></a>第十章 source</h1><h2 id="10-1-posts"><a href="#10-1-posts" class="headerlink" title="10.1 _posts"></a>10.1 _posts</h2><h2 id="10-2-about"><a href="#10-2-about" class="headerlink" title="10.2 about"></a>10.2 about</h2><h2 id="10-3-CNAME"><a href="#10-3-CNAME" class="headerlink" title="10.3 CNAME"></a>10.3 CNAME</h2><h2 id="10-4-tags"><a href="#10-4-tags" class="headerlink" title="10.4 tags"></a>10.4 tags</h2><h1 id="第十一章-themes"><a href="#第十一章-themes" class="headerlink" title="第十一章 themes"></a>第十一章 themes</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这是存放我下载的各种主题的文件夹，目前我使用的是next主题，故本文只选择next作为参考</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/30/过去的许多年/" rel="prev" title="过去的许多年">
+                <i class="fa fa-chevron-left"></i> 过去的许多年
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/26/计算机是怎样跑起来的笔记/" rel="next" title="《计算机是怎样跑起来的》笔记">
+                《计算机是怎样跑起来的》笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="YTCH">
+            
+              <p class="site-author-name" itemprop="name">YTCH</p>
+              <p class="site-description motion-element" itemprop="description">一个有时贫穷有时富有的人</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/laochensad" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:4923shawn.johnston@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ytch160207324" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/4954003" target="_blank" title="Bilibili">
+                      
+                        <i class="fa fa-fw fa-favicon"></i>Bilibili</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-config-yml"><span class="nav-text">第一章 _config.yml</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Site"><span class="nav-text">1.1 Site</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-URL"><span class="nav-text">1.2 URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Directory"><span class="nav-text">1.3 Directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Writing"><span class="nav-text">1.4 Writing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-index-generator"><span class="nav-text">1.5 index_generator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Category-amp-Tag"><span class="nav-text">1.6 Category &amp; Tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Date-Time-format"><span class="nav-text">1.7 Date / Time format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-Pagination"><span class="nav-text">1.8 Pagination</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-Extensions"><span class="nav-text">1.9 Extensions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-feed"><span class="nav-text">1.10 feed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-search"><span class="nav-text">1.11 search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-Deployment"><span class="nav-text">1.12 Deployment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-githubEmojis"><span class="nav-text">1.13 githubEmojis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-14-live2d"><span class="nav-text">1.14 live2d</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-db-json"><span class="nav-text">第二章 db.json</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-debug-json"><span class="nav-text">第三章 debug.json</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-live2d-models"><span class="nav-text">第四章 live2d_models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-live2d-widget-model-koharu"><span class="nav-text">4.1 live2d-widget-model-koharu</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-assets"><span class="nav-text">4.1.1 assets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-package-lock-json"><span class="nav-text">4.1.2 package-lock.json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-package-json"><span class="nav-text">4.1.3 package.json</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章-node-modules"><span class="nav-text">第五章 node_modules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-a-sync-waterfall"><span class="nav-text">5.1 a-sync-waterfall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-abbrev"><span class="nav-text">5.2 abbrev</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-accepts"><span class="nav-text">5.3 accepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-align-text"><span class="nav-text">5.4 align-text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-amdefine"><span class="nav-text">5.5 amdefine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-ansi-regex"><span class="nav-text">5.6 ansi-regex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7-ansi-styles"><span class="nav-text">5.7 ansi-styles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-8-anymatch"><span class="nav-text">5.8 anymatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-9-archy"><span class="nav-text">5.9 archy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-10-argparse"><span class="nav-text">5.10 argparse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-11-arr-diff"><span class="nav-text">5.11 arr-diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-12-arr-flatten"><span class="nav-text">5.12 arr-flatten</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-13-arr-union"><span class="nav-text">5.13 arr-union</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-14-array-unique"><span class="nav-text">5.14 array-unique</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-15-asap"><span class="nav-text">5.15 asap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-15-assign-symbols"><span class="nav-text">5.15 assign-symbols</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-16-async"><span class="nav-text">5.16 async</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-17-async-each"><span class="nav-text">5.17 async-each</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-18-atob"><span class="nav-text">5.18 atob</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-19-babel-code-frame"><span class="nav-text">5.19 babel-code-frame</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-20-babel-eslint"><span class="nav-text">5.20 babel-eslint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-21-babel-messages"><span class="nav-text">5.21 babel-messages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-22-babel-runtime"><span class="nav-text">5.22 babel-runtime</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-23-babel-traverse"><span class="nav-text">5.23 babel-traverse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-24-babel-types"><span class="nav-text">5.24 babel-types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-25-babylon"><span class="nav-text">5.25 babylon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-26-balances-match"><span class="nav-text">5.26 balances-match</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-27-base"><span class="nav-text">5.27 base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-28-basic-auth"><span class="nav-text">5.28 basic-auth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-extensions"><span class="nav-text">binary-extensions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bluebird"><span class="nav-text">bluebird</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolbase"><span class="nav-text">boolbase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#brace-expansion"><span class="nav-text">brace-expansion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#braces"><span class="nav-text">braces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#browser-fingerprint"><span class="nav-text">browser-fingerprint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bytes"><span class="nav-text">bytes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache-base"><span class="nav-text">cache-base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#camel-case"><span class="nav-text">camel-case</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#camelcase"><span class="nav-text">camelcase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#center-align"><span class="nav-text">center-align</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chalk"><span class="nav-text">chalk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cheerio"><span class="nav-text">cheerio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chokidar"><span class="nav-text">chokidar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class-utils"><span class="nav-text">class-utils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cliui"><span class="nav-text">cliui</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code-point-at"><span class="nav-text">code-point-at</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collection-visit"><span class="nav-text">collection-visit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#color-convert"><span class="nav-text">color-convert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#color-name"><span class="nav-text">color-name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#colors"><span class="nav-text">colors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#command-exists"><span class="nav-text">command-exists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conponent-emitter"><span class="nav-text">conponent-emitter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compression"><span class="nav-text">compression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#concat-map"><span class="nav-text">concat-map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connect"><span class="nav-text">connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy-descriptor"><span class="nav-text">copy-descriptor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-js"><span class="nav-text">core-js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cross-spawn"><span class="nav-text">cross-spawn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css-parse"><span class="nav-text">css-parse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css-select"><span class="nav-text">css-select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css-what"><span class="nav-text">css-what</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cuid"><span class="nav-text">cuid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debug"><span class="nav-text">debug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decamelize"><span class="nav-text">decamelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decode-uri-component"><span class="nav-text">decode-uri-component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#define-property"><span class="nav-text">define-property</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#depd"><span class="nav-text">depd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#destroy"><span class="nav-text">destroy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom-serializer"><span class="nav-text">dom-serializer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domelementtype"><span class="nav-text">domelementtype</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domhandler"><span class="nav-text">domhandler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domutils"><span class="nav-text">domutils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ee-first"><span class="nav-text">ee-first</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ejs"><span class="nav-text">ejs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#encodeurl"><span class="nav-text">encodeurl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#entities"><span class="nav-text">entities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#escape-html"><span class="nav-text">escape-html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#escape-string-regexp"><span class="nav-text">escape-string-regexp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#esprima"><span class="nav-text">esprima</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#esutils"><span class="nav-text">esutils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#etag"><span class="nav-text">etag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expand"><span class="nav-text">expand-</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第六章-package-lock-json"><span class="nav-text">第六章 package-lock.json</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七章-package-json"><span class="nav-text">第七章 package.json</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第八章-public"><span class="nav-text">第八章 public</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-2018"><span class="nav-text">8.1 2018</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-about"><span class="nav-text">8.2 about</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-archives"><span class="nav-text">8.3 archives</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-atom-xml"><span class="nav-text">8.4 atom.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-5-CNAME"><span class="nav-text">8.5 CNAME</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-6-css"><span class="nav-text">8.6 css</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-7-images"><span class="nav-text">8.7 images</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-8-index-html"><span class="nav-text">8.8 index.html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-9-js"><span class="nav-text">8.9 js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-10-lib"><span class="nav-text">8.10 lib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-11-live2dw"><span class="nav-text">8.11 live2dw</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-12-tags"><span class="nav-text">8.12 tags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-13-uploads"><span class="nav-text">8.13 uploads</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第九章-scaffolds"><span class="nav-text">第九章 scaffolds</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-draft-md"><span class="nav-text">9.1 draft,md</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-page-md"><span class="nav-text">9.2 page.md</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-post-md"><span class="nav-text">9.3 post.md</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十章-source"><span class="nav-text">第十章 source</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-posts"><span class="nav-text">10.1 _posts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-about"><span class="nav-text">10.2 about</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-CNAME"><span class="nav-text">10.3 CNAME</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-tags"><span class="nav-text">10.4 tags</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十一章-themes"><span class="nav-text">第十一章 themes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-text">背景</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YTCH</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">6.3k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("4CSsyPwIma6X4gCUvou2UI5v-gzGzoHsz", "JopVgnTHyjjjjmkmfoDiEoIt");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.005},"react":{"opacityDefault":1,"opacityOnHover":1},"log":false});</script></body>
+</html>
