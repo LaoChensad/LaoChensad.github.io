@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="YTCH的小世界">
 <meta property="og:description" content="关于这本书的一些笔记= =其实就是我根据个人理解的改编浓缩，我想这样做有助于我记忆书本内容（本文根据我的纸质笔记进一步改编）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-04T01:10:54.705Z">
+<meta property="og:updated_time" content="2019-01-06T04:18:24.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《计算机是怎样跑起来的》笔记">
 <meta name="twitter:description" content="关于这本书的一些笔记= =其实就是我根据个人理解的改编浓缩，我想这样做有助于我记忆书本内容（本文根据我的纸质笔记进一步改编）">
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.8k
+                  6k
                 </span>
               
 
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  20
+                  21
                 </span>
               
             </div>
@@ -538,6 +538,19 @@
 <p>计算机具有硬件处理中断的能力；中断一词的英文是Interrupt。</p>
 <h2 id="4-7-特殊的程序流程——事件驱动"><a href="#4-7-特殊的程序流程——事件驱动" class="headerlink" title="4.7 特殊的程序流程——事件驱动"></a>4.7 特殊的程序流程——事件驱动</h2><p>程序员们经常用事件驱动的方式编写那些工作再GUI（Graphical User Interface，图形用户界面）环境中的应用程序，例如Windows操作系统中的应用程序。</p>
 <p>通常把用户在应用程序中点击鼠标或者敲击键盘这样的操作称作“事件”（Event）。负责检测事件的是Windows。Windows通过调用应用程序的WndProc（）函数通知应用程序事件的发生。而应用程序则根据事件的类型做处相应的处理。这种机制就是事件驱动。可以说事件驱动也是一种特殊的条件分支，它以从windows送来的通知为条件，根据通知的内容决定程序下一步的流程。</p>
+<p>要实现事件驱动，就必须把应用程序中的WndProc（）函数（称为窗口过程，Window Procedure）的起始内存地址告诉Windows。这一步将在应用程序WinMain（）中作为初始化处理被执行。</p>
+<p>状态转化图是一种便于表示事件驱动的图。状态转化图中有多个状态，反映了由于某种原因从某个状态转化到另一个状态的流程。工作在GUI环境中的程序，其显示在画面上的窗口就有若干个状态。以计算器应用程序为例，如下图：</p>
+<p>【图】</p>
+<p>状态转化表比较方便，用excel就能画。</p>
+<h1 id="第五章-与算法成为好朋友的七个要点"><a href="#第五章-与算法成为好朋友的七个要点" class="headerlink" title="第五章 与算法成为好朋友的七个要点"></a>第五章 与算法成为好朋友的七个要点</h1><h2 id="章前"><a href="#章前" class="headerlink" title="章前"></a>章前</h2><ol>
+<li><p>Algorithm翻译成中文是什么？<br><strong>Algorithm翻译成中文是“算法”。</strong></p>
+</li>
+<li><p>辗转相除法是用于计算什么的算法？<br><strong>是用于计算最大公约数的算法。</strong></p>
+</li>
+<li><p>程序中的“哨兵”指的是什么？<br><strong>“哨兵”指的是一种含有特殊值的数据，可用于标识数据的结尾等。</strong> </p>
+</li>
+</ol>
+<hr>
 
       
     </div>
@@ -661,7 +674,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -742,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第1章-计算机的三大原则"><span class="nav-text">第1章 计算机的三大原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#章前小问"><span class="nav-text">章前小问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-计算机的三大根本性基础"><span class="nav-text">1.1 计算机的三大根本性基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-输入、运算、输出是硬件的基础"><span class="nav-text">1.2 输入、运算、输出是硬件的基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-软件是指令和数据的集合"><span class="nav-text">1.3 软件是指令和数据的集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件"><span class="nav-text">软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-对计算机来说什么都是数字"><span class="nav-text">1.4 对计算机来说什么都是数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对。"><span class="nav-text">1.5 只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-为了贴近人类，计算机在不断地进化"><span class="nav-text">1.6 为了贴近人类，计算机在不断地进化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第2章"><span class="nav-text">第2章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方法的进化"><span class="nav-text">编程方法的进化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第3章-体验一次手工汇编"><span class="nav-text">第3章 体验一次手工汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#小问"><span class="nav-text">小问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-从程序员的角度看硬件"><span class="nav-text">3.1 从程序员的角度看硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-机器语言和汇编语言"><span class="nav-text">3.2 机器语言和汇编语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Z80-CPU的寄存器结构"><span class="nav-text">3.3 Z80 CPU的寄存器结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-追踪程序的运行过程"><span class="nav-text">3.4 追踪程序的运行过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-尝试手工汇编"><span class="nav-text">3.5 尝试手工汇编</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6尝试估算程序的执行时间"><span class="nav-text">3.6尝试估算程序的执行时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-程序像河水一样流动着"><span class="nav-text">第4章 程序像河水一样流动着</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开卷有益"><span class="nav-text">开卷有益</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-程序的流程分为三种"><span class="nav-text">4.1 程序的流程分为三种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-用流程图表示程序的流程"><span class="nav-text">4.2 用流程图表示程序的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-表示循环程序块的“帽子”和“短裤”"><span class="nav-text">4.3 表示循环程序块的“帽子”和“短裤”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-结构化程序设计"><span class="nav-text">4.4 结构化程序设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-画流程图来思考算法"><span class="nav-text">4.5 画流程图来思考算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-特殊的程序流程——中断处理"><span class="nav-text">4.6 特殊的程序流程——中断处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-特殊的程序流程——事件驱动"><span class="nav-text">4.7 特殊的程序流程——事件驱动</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第1章-计算机的三大原则"><span class="nav-text">第1章 计算机的三大原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#章前小问"><span class="nav-text">章前小问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-计算机的三大根本性基础"><span class="nav-text">1.1 计算机的三大根本性基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-输入、运算、输出是硬件的基础"><span class="nav-text">1.2 输入、运算、输出是硬件的基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-软件是指令和数据的集合"><span class="nav-text">1.3 软件是指令和数据的集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件"><span class="nav-text">软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-对计算机来说什么都是数字"><span class="nav-text">1.4 对计算机来说什么都是数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对。"><span class="nav-text">1.5 只要理解了三大原则，即使遇到难懂的最新技术，也能轻松应对。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-为了贴近人类，计算机在不断地进化"><span class="nav-text">1.6 为了贴近人类，计算机在不断地进化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第2章"><span class="nav-text">第2章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程方法的进化"><span class="nav-text">编程方法的进化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第3章-体验一次手工汇编"><span class="nav-text">第3章 体验一次手工汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#小问"><span class="nav-text">小问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-从程序员的角度看硬件"><span class="nav-text">3.1 从程序员的角度看硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-机器语言和汇编语言"><span class="nav-text">3.2 机器语言和汇编语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Z80-CPU的寄存器结构"><span class="nav-text">3.3 Z80 CPU的寄存器结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-追踪程序的运行过程"><span class="nav-text">3.4 追踪程序的运行过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-尝试手工汇编"><span class="nav-text">3.5 尝试手工汇编</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6尝试估算程序的执行时间"><span class="nav-text">3.6尝试估算程序的执行时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-程序像河水一样流动着"><span class="nav-text">第4章 程序像河水一样流动着</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开卷有益"><span class="nav-text">开卷有益</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-程序的流程分为三种"><span class="nav-text">4.1 程序的流程分为三种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-用流程图表示程序的流程"><span class="nav-text">4.2 用流程图表示程序的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-表示循环程序块的“帽子”和“短裤”"><span class="nav-text">4.3 表示循环程序块的“帽子”和“短裤”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-结构化程序设计"><span class="nav-text">4.4 结构化程序设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-画流程图来思考算法"><span class="nav-text">4.5 画流程图来思考算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-特殊的程序流程——中断处理"><span class="nav-text">4.6 特殊的程序流程——中断处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-特殊的程序流程——事件驱动"><span class="nav-text">4.7 特殊的程序流程——事件驱动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章-与算法成为好朋友的七个要点"><span class="nav-text">第五章 与算法成为好朋友的七个要点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#章前"><span class="nav-text">章前</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -784,7 +797,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.8k</span>
+    <span title="Site words total count">10.4k</span>
   
 </div>
 
